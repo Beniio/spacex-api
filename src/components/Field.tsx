@@ -7,16 +7,17 @@ interface FieldProps {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: block;
   margin: 10px;
-  max-width: 35000px;
-  padding: 20px;
+  max-width: 350px;
+  padding: 4px 0;
 `;
-const FieldName = styled.label``;
-const FieldValue = styled.label`
-  padding-left: 20px;
+const FieldName = styled.label`
   font-weight: bold;
+  white-space: pre-line;
+`;
+const FieldValue = styled.span`
+  padding-left: 20px;
 `;
 
 export const Field: React.FC<FieldProps> = ({ name, value }) => {

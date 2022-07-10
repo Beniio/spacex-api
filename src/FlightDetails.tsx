@@ -19,38 +19,51 @@ interface LaunchDetails {
 
 const StyledContainer = styled.div`
   display: flex;
-  margin: 0 40px 0 40px;
+  flex-flow: row wrap;
   height: 100%;
-  width: 100%;
-  justify-content: center;
+  width: 80%;
 `;
 
 const StyledColumn = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 20px 0 20px;
 `;
+
 const StyledRow = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 10px 0;
 `;
 
 const ImageContainer = styled.div`
-  display: flex;
+  margin-right: 60px;
+  justify-content: center;
+  align-items: center;
   width: 700px;
-  margin-right: 50px;
 `;
 
 const StyledBulletList = styled.li``;
 
 const StyledImage = styled.img`
-  width: 100px;
-  height: 80px;
-  padding: 4px;
+  width: 200px;
+  height: 160px;
+  padding: 5px;
+
   &:hover {
-    -webkit-transform: scale(10); /* or some other value */
-    transform: scale(10);
+    -webkit-transform: scale(2);
+    transform: scale(2);
   }
 `;
+
+const StyledInfo = styled.div`
+  display: flex;
+  border: 2px solid grey;
+  border-radius: 30px;
+`;
+
+const StyledVideo = styled.div``;
+
 export default function FlightDetails() {
   const location: any = useLocation();
 
@@ -59,7 +72,7 @@ export default function FlightDetails() {
   const listItems = launch.payloads?.map((item) => (
     <>
       <StyledBulletList>
-        {item?.payload_type} Mass[kg]:{item?.payload_mass_kg}
+        {item?.payload_type} {item?.payload_mass_kg}[kg]
       </StyledBulletList>
     </>
   ));
@@ -75,20 +88,28 @@ export default function FlightDetails() {
       <Header value={launch.missionName} />
       <StyledContainer>
         <StyledRow>
-          <StyledColumn>
-            <Field name="Date:" value={launch.date} />
-            <Field name="Launch site:" value={launch.launchSite} />
-            <Field name="Rocket name:" value={launch.rocketName} />
-            <Field name="Launch status:" value={convertFlightStatus(launch.status)} />
-            <Field name="Payload:" />
-            <ul>{listItems}</ul>
-          </StyledColumn>
-          <StyledColumn>
-            <ReactPlayer url={launch.videoLink} />
-            <ImageContainer>
-              <ul>{listImages}</ul>
-            </ImageContainer>
-          </StyledColumn>
+          <StyledInfo>
+            <StyledColumn>
+              <Field name="Date:" value={launch.date} />
+              <Field name="Launch site:" value={launch.launchSite} />
+              <Field name="Rocket name:" value={launch.rocketName} />
+              <Field name="Launch status:" value={convertFlightStatus(launch.status)} />
+            </StyledColumn>
+
+            <StyledColumn>
+              <Field name="Payload:" />
+              <ul>{listItems}</ul>
+            </StyledColumn>
+          </StyledInfo>
+        </StyledRow>
+
+        <StyledRow>
+          <StyledVideo>
+            <ReactPlayer url={launch.videoLink} />{' '}
+          </StyledVideo>
+          <ImageContainer>
+            <ul>{listImages}</ul>
+          </ImageContainer>
         </StyledRow>
       </StyledContainer>
     </>
