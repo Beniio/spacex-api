@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface HeaderProps {
+interface MissionHeaderProps {
   name?: string;
   value: string;
 }
@@ -18,7 +18,7 @@ const FieldValue = styled.label`
   font-size: 32px;
 `;
 
-export const Header: React.FC<HeaderProps> = ({ value }) => {
+export const MissionHeader: React.FC<MissionHeaderProps> = ({ value }) => {
   return (
     <Container>
       <FieldValue>{value}</FieldValue>
