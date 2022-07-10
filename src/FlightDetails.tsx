@@ -51,8 +51,7 @@ const StyledImage = styled.img`
 const StyledVideo = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 613px;
-  padding-left: 42px;
+  width: 500px;
 `;
 
 const StyledTableColumn = styled.tr`
@@ -96,8 +95,8 @@ export default function FlightDetails() {
       <MissionHeader value={launch.missionName} />
       <Row>
         <Column>
-          <p>Details:</p>
           <table className="table">
+            <p>Details</p>
             <tbody>
               {data.map((row) => (
                 <StyledTableColumn key={row.title}>
@@ -108,32 +107,35 @@ export default function FlightDetails() {
             </tbody>
           </table>
         </Column>
-        <Column>
-          <ImageContainer>
-            <ul>{listImages}</ul>
-          </ImageContainer>
-        </Column>
-      </Row>
-      <Column>
-        <p>Payload:</p>
-        {launch?.payloads && (
+        {launch.payloads && (
           <table className="table">
+            <p>Payload</p>
             <tbody>
               {launch.payloads.map((row) => (
                 <StyledTableColumn key={row}>
                   <StyledTableRow>{row.payload_type}</StyledTableRow>
-                  <StyledTableRow> {row.payload_mass_kg}kg</StyledTableRow>
+                  {row.payload_mass_kg && <StyledTableRow> {row.payload_mass_kg}kg</StyledTableRow>}
                 </StyledTableColumn>
               ))}
             </tbody>
           </table>
         )}
-      </Column>
-      <Column>
-        <StyledVideo>
-          <ReactPlayer url={launch.videoLink} />{' '}
-        </StyledVideo>
-      </Column>
+        <Column></Column>
+      </Row>
+      <Row>
+        <Column>
+          <p>Video</p>
+          <StyledVideo>
+            <ReactPlayer url={launch.videoLink} />{' '}
+          </StyledVideo>
+        </Column>
+        <Column>
+          <p>Images</p>
+          <ImageContainer>
+            <ul>{listImages}</ul>
+          </ImageContainer>
+        </Column>
+      </Row>
     </StyledContainer>
   );
 }
